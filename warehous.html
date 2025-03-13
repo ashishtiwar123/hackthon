@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Warehouse Inventory System</title>
+    <link rel="stylesheet" href="warehouse.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-warehouse"></i> SmartStock</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active"><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#"><i class="fas fa-boxes"></i> Inventory</a></li>
+                    <li><a href="#"><i class="fas fa-truck"></i> Shipments</a></li>
+                    <li><a href="#"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+                    <li><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation Bar -->
+            <header class="top-bar">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+
+                    <div class="text-search">
+                      <input type="text" placeholder="Search inventory...">
+                    </div>
+                </div>
+                <div class="user-actions">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </button>
+                    <div class="user-profile">
+                        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="User Profile">
+                        <span>Ashish Tiwari</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard">
+                <h1>Dashboard Overview</h1>
+                
+                <!-- Stats Cards -->
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: rgba(52, 152, 219, 0.2);">
+                            <i class="fas fa-boxes" style="color: #3498db;"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Total Items</h3>
+                            <p class="stat-value">2,547</p>
+                            <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 12.5% from last month</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: rgba(46, 204, 113, 0.2);">
+                            <i class="fas fa-dolly" style="color: #2ecc71;"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>In Stock</h3>
+                            <p class="stat-value">1,890</p>
+                            <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 8.2% from last month</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: rgba(231, 76, 60, 0.2);">
+                            <i class="fas fa-exclamation-triangle" style="color: #e74c3c;"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Low Stock</h3>
+                            <p class="stat-value">128</p>
+                            <p class="stat-change negative"><i class="fas fa-arrow-up"></i> 5.3% from last month</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: rgba(155, 89, 182, 0.2);">
+                            <i class="fas fa-truck-loading" style="color: #9b59b6;"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Pending Orders</h3>
+                            <p class="stat-value">42</p>
+                            <p class="stat-change negative"><i class="fas fa-arrow-down"></i> 3.1% from last month</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inventory Management Section -->
+                <div class="inventory-section">
+                    <div class="section-header">
+                        <h2>Inventory Management</h2>
+                        <div class="actions">
+                            <button class="btn btn-primary" id="addItemBtn"><i class="fas fa-plus"></i> Add New Item</button>
+                            <button class="btn btn-outline"><i class="fas fa-filter"></i> Filter</button>
+                            <button class="btn btn-outline"><i class="fas fa-download"></i> Export</button>
+                        </div>
+                    </div>
+
+                    <!-- Inventory Table -->
+                    <div class="table-container">
+                        <table class="inventory-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="selectAll">
+                                    </th>
+                                    <th>Item ID</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>In Stock</th>
+                                    <th>Status</th>
+                                    <th>Last Updated</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox" class="item-checkbox"></td>
+                                    <td>WH-1001</td>
+                                    <td>Wireless Headphones</td>
+                                    <td>Electronics</td>
+                                    <td>245</td>
+                                    <td><span class="status-badge in-stock">In Stock</span></td>
+                                    <td>2023-09-15</td>
+                                    <td class="actions-cell">
+                                        <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="item-checkbox"></td>
+                                    <td>WH-1002</td>
+                                    <td>Smart Watch</td>
+                                    <td>Electronics</td>
+                                    <td>112</td>
+                                    <td><span class="status-badge in-stock">In Stock</span></td>
+                                    <td>2023-09-14</td>
+                                    <td class="actions-cell">
+                                        <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="item-checkbox"></td>
+                                    <td>WH-1003</td>
+                                    <td>Bluetooth Speaker</td>
+                                    <td>Electronics</td>
+                                    <td>18</td>
+                                    <td><span class="status-badge low-stock">Low Stock</span></td>
+                                    <td>2023-09-13</td>
+                                    <td class="actions-cell">
+                                        <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="item-checkbox"></td>
+                                    <td>WH-1004</td>
+                                    <td>Laptop Stand</td>
+                                    <td>Accessories</td>
+                                    <td>0</td>
+                                    <td><span class="status-badge out-of-stock">Out of Stock</span></td>
+                                    <td>2023-09-12</td>
+                                    <td class="actions-cell">
+                                        <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="item-checkbox"></td>
+                                    <td>WH-1005</td>
+                                    <td>Wireless Keyboard</td>
+                                    <td>Electronics</td>
+                                    <td>87</td>
+                                    <td><span class="status-badge in-stock">In Stock</span></td>
+                                    <td>2023-09-11</td>
+                                    <td class="actions-cell">
+                                        <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                 <!-- Graph -->
+
+                    <div class="graph">
+                        <h2>Inventory Stock Levels</h2>
+                        <div class="graph-container">
+                            <canvas id="inventoryChart"></canvas>
+                        </div>
+                    </div>
+        
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <span class="pagination-ellipsis">...</span>
+                        <button class="pagination-btn">10</button>
+                        <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+             
+            
+
+
+
+
+
+        </main>
+    </div>
+
+    <!-- Add Item Modal -->
+    <div class="modal" id="addItemModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Inventory Item</h2>
+                <button class="close-btn" id="closeModal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="addItemForm">
+                    <div class="form-group">
+                        <label for="itemName">Item Name</label>
+                        <input type="text" id="itemName" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="itemCategory">Category</label>
+                            <select id="itemCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Accessories">Accessories</option>
+                                <option value="Clothing">Clothing</option>
+                                <option value="Home Goods">Home Goods</option>
+                                <option value="Office Supplies">Office Supplies</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemQuantity">Quantity</label>
+                            <input type="number" id="itemQuantity" min="0" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="itemSKU">SKU</label>
+                            <input type="text" id="itemSKU" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemLocation">Warehouse Location</label>
+                            <input type="text" id="itemLocation" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemDescription">Description</label>
+                        <textarea id="itemDescription" rows="3"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="itemPrice">Unit Price ($)</label>
+                            <input type="number" id="itemPrice" min="0" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reorderLevel">Reorder Level</label>
+                            <input type="number" id="reorderLevel" min="0" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Item Image</label>
+                        <div class="file-upload">
+                            <input type="file" id="itemImage" accept="image/*">
+                            <label for="itemImage"><i class="fas fa-cloud-upload-alt"></i> Choose File</label>
+                            <span class="file-name">No file chosen</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelBtn">Cancel</button>
+                <button class="btn btn-primary" id="saveItemBtn">Save Item</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="warehouse.js"></script>
+    
+</body>
+</html>

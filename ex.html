@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Stock Line Graph</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        .graph {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .graph-container {
+            position: relative;
+            height: 400px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="graph">
+        <h2>Inventory Stock Levels</h2>
+        <div class="graph-container">
+            <canvas id="inventoryChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Sample graph data
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const graphData = {
+            'Product A': [120, 135, 150, 110, 90, 105, 130, 145, 160, 170, 155, 140],
+            'Product B': [80, 95, 105, 120, 135, 150, 140, 125, 110, 100, 90, 85],
+            'Product C': [50, 45, 60, 75, 90, 100, 110, 105, 95, 80, 70, 65]
+        };
+
+        // Create chart
+        const ctx = document.getElementById('inventoryChart').getContext('2d');
+        const inventoryChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [
+                    {
+                        label: 'Product A',
+                        data: graphData['Product A'],
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        tension: 0.4,
+                        borderWidth: 2,
+                        fill: true
+                    },
+                    {
+                        label: 'Product B',
+                        data: graphData['Product B'],
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        tension: 0.4,
+                        borderWidth: 2,
+                        fill: true
+                    },
+                    {
+                        label: 'Product C',
+                        data: graphData['Product C'],
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        tension: 0.4,
+                        borderWidth: 2,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Monthly Inventory Stock Levels',
+                        font: {
+                            size: 16
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            boxWidth: 12
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Units in Stock'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Month'
+                        }
+                    }
+                },
+                elements: {
+                    point: {
+                        radius: 3,
+                        hoverRadius: 7
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'nearest'
+                }
+            }
+        });
+    </script>
+</body>
+</html>
